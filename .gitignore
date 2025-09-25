@@ -1,0 +1,30 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Bb]uild/
+*.vcxproj*
+*.vcxproj.filters
+*.vcxproj.user
+
+# Unreal
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Backup files
+*.tmp
+*.bak
+*.log
+
+# Ignore database files
+*.db
+*.opendb
+*.ipch
