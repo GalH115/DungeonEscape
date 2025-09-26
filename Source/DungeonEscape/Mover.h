@@ -17,6 +17,10 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+    
+private:
+    
+    UPROPERTY(VisibleAnywhere) bool ShouldMove = false;
 
 public:	
 	// Called every frame
@@ -26,10 +30,12 @@ public:
 
 	UPROPERTY(EditAnywhere) float MoveTime = 4.0f;
 
-	UPROPERTY(EditAnywhere) bool ShouldMove = false;
-
 	UPROPERTY(VisibleAnywhere) bool ReachedTargetLocation = false;
 
 	FVector TargetLocation;
 	FVector StartLocation;
+    
+    bool GetShouldMove();
+    
+    void SetShouldMove(bool NewShouldMove);
 };

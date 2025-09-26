@@ -25,6 +25,10 @@ public:
 	UPROPERTY(EditAnywhere) bool IsPressurePlate = false;
 	
 	UPROPERTY(EditAnywhere) AActor* MoverActor;
+    
+    UPROPERTY(VisibleAnywhere) bool IsTriggered=false;
+    
+    UPROPERTY(VisibleAnywhere) int32 ActivatorCount = 0;
 
 	UMover* Mover;
 
@@ -36,4 +40,6 @@ public:
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherCmop, int32 OtherBodyIndex);
+    
+    void Trigger(bool NewTriggerValue);
 };
