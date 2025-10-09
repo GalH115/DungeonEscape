@@ -86,18 +86,20 @@ void ADungeonEscapeCharacter::Interact()
 	FCollisionShape InteractionSphere = FCollisionShape::MakeSphere(InteractionSphereRadius);
 	DrawDebugSphere(GetWorld(), End, InteractionSphereRadius, 20, FColor::Blue, false, 5);
 
-	FVector MyVector = FVector(1.0f, 2.0f, 3.0f);
-	FVector& MyVectorRef = MyVector;
+	FHitResult HitResult;
+	bool HasHit = GetWorld()->SweepSingleByChannel(HitResult, Start, End, FQuat::Identity, ECC_GameTraceChannel2, InteractionSphere);
 
-	UE_LOG(LogTemp, Warning, TEXT("MyVector: %s, and MyVectorRef: %s, before the changes."), *MyVector.ToCompactString(), *MyVectorRef.ToCompactString())
-
-	MyVectorRef.X = 2.0f;
-	MyVectorRef.Y = 4.0f;
-	MyVectorRef.Z = 6.0f;
-
-	UE_LOG(LogTemp, Warning, TEXT("MyVector: %s, and MyVectorRef: %s, after the changes."), *MyVector.ToCompactString(), *MyVectorRef.ToCompactString())
+	if (HasHit)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		UE_LOG(LogTemp, Warning, TEXT("HitActor: %s"), *HitActor->GetActorNameOrLabel())
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No actor hit!"))
+	}
+	
 }
-
 
 void ADungeonEscapeCharacter::MoveInput(const FInputActionValue& Value)
 {
