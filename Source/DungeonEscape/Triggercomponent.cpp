@@ -13,11 +13,11 @@ void UTriggerComponent::BeginPlay()
 		Mover = MoverActor->FindComponentByClass<UMover>();
 		if (Mover) 
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Successfully found the mover component!"));
+			UE_LOG(LogTemp, Display, TEXT("Successfully found the mover component!"));
 		}
 		else 
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Failed to find the mover component!"));
+			UE_LOG(LogTemp, Display, TEXT("Failed to find the mover component!"));
 		}
 	}
 	else 

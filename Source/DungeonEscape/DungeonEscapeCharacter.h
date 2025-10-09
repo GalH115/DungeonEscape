@@ -48,9 +48,16 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input")
 	class UInputAction* MouseLookAction;
+    
+    /** Interact Input Action */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input")
+    class UInputAction* InteractAction;
 	
 public:
 	ADungeonEscapeCharacter();
+    
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
 
 protected:
 
@@ -89,6 +96,10 @@ public:
 
 	/** Returns first person camera component **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+    
+    void Interact();
 
+	UPROPERTY(EditAnywhere) float MaxInteractionDistance = 300.0f;
+
+	UPROPERTY(EditAnywhere) float InteractionSphereRadius = 30.0f;
 };
-

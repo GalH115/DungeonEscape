@@ -63,11 +63,39 @@ void ADungeonEscapeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		// Looking/Aiming
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ADungeonEscapeCharacter::LookInput);
 		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &ADungeonEscapeCharacter::LookInput);
+        
+        EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ADungeonEscapeCharacter::Interact);
 	}
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+void ADungeonEscapeCharacter::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+}
+
+void ADungeonEscapeCharacter::Interact()
+{
+    FVector Start = FirstPersonCameraComponent->GetComponentLocation();
+    FVector End = Start + (FirstPersonCameraComponent->GetForwardVector() * MaxInteractionDistance);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 5.0f);
+
+	FCollisionShape InteractionSphere = FCollisionShape::MakeSphere(InteractionSphereRadius);
+	DrawDebugSphere(GetWorld(), End, InteractionSphereRadius, 20, FColor::Blue, false, 5);
+
+	FVector MyVector = FVector(1.0f, 2.0f, 3.0f);
+	FVector& MyVectorRef = MyVector;
+
+	UE_LOG(LogTemp, Warning, TEXT("MyVector: %s, and MyVectorRef: %s, before the changes."), *MyVector.ToCompactString(), *MyVectorRef.ToCompactString())
+
+	MyVectorRef.X = 2.0f;
+	MyVectorRef.Y = 4.0f;
+	MyVectorRef.Z = 6.0f;
+
+	UE_LOG(LogTemp, Warning, TEXT("MyVector: %s, and MyVectorRef: %s, after the changes."), *MyVector.ToCompactString(), *MyVectorRef.ToCompactString())
 }
 
 
