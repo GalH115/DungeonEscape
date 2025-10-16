@@ -8,6 +8,8 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Lock.h"
+#include "ColleactableItem.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -95,11 +97,19 @@ void ADungeonEscapeCharacter::Interact()
 
 		if (HitActor->ActorHasTag("CollectableItem"))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Collectable Item!"))
+			AColleactableItem* CollectableItem = Cast<AColleactableItem>(HitActor);
+			if (CollectableItem)
+			{
+			UE_LOG(LogTemp, Warning, TEXT("Collectable Item with name %s!"), *CollectableItem->ItemName)
+			}
 		}
 		else if (HitActor->ActorHasTag(("Lock")))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Lock Actor!"))
+			ALock* LockActor = Cast<ALock>(HitActor);
+			if (LockActor)
+			{
+			UE_LOG(LogTemp, Warning, TEXT("Lock Actor with key item name %s!"), *LockActor->KeyItemName)
+			}
 		}
 	}
 	else
