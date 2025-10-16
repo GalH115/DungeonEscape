@@ -9,7 +9,7 @@
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Lock.h"
-#include "ColleactableItem.h"
+#include "CollectableItem.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -97,7 +97,7 @@ void ADungeonEscapeCharacter::Interact()
 
 		if (HitActor->ActorHasTag("CollectableItem"))
 		{
-			AColleactableItem* CollectableItem = Cast<AColleactableItem>(HitActor);
+			ACollectableItem* CollectableItem = Cast<ACollectableItem>(HitActor);
 			if (CollectableItem)
 			{
 				Inventory.Add(CollectableItem->ItemName);
